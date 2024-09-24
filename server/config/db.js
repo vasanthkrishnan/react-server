@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGODB || "mongodb+srv://krish:1234@in-aws.8v7mf.mongodb.net/krish?retryWrites=true&w=majority&appName=in-aws")
+require('dotenv').config()
+mongoose.connect(process.env.MONGODBURL)
 
 const connection = mongoose.connection
 connection.on('connected', () => {
