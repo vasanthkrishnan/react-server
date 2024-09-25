@@ -16,10 +16,10 @@ router.post('/add', async (req, res) => {
         const newProjectData = await new Projects(req.body)
         const { title, desc } = newProjectData
         if(!title || !desc) {
-            res.json({message: "Title & Desc Required"}).status(200)
+            res.json({message: "Title & Desc Required"}).status(500)
         }
         const savedData = await newProjectData.save()
-        res.json(savedData).status(201)
+        res.json(savedData).status(200)
     } catch (error) {
         res.json(error).status(400)
     }
@@ -32,7 +32,7 @@ router.put('/edit/:id', async (req, res) => {
         if(!currentRecord) {
             res.status(500).json({message:"Project not fount!"})
         }
-        const updatedProduct = await Projects.findByIdAndUpdate(id, req.body({new : true}))
+        const updatedProduct = await Projects.findByIdAndUpdate(id, req.body,{new : true})
         res.status(200).json(updatedProduct)  
     } catch (error) {
         res.status(500).json({message: "error"})
